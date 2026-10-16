@@ -1,0 +1,22 @@
+-- =============================================
+-- Six Yards Love eCommerce - Database Setup
+-- PostgreSQL 5432
+-- =============================================
+
+-- Run these in order using psql or pgAdmin:
+--
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 001_schema.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 002_schema-coupons.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 003_schema-coupons-migration.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 004_schema-international.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 005_schema-india-localization.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 006_schema-media.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 007_schema-shiprocket.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 008_schema-payments.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 009_schema-return-request.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 010_schema-courier-selection.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 011_schema-shipping-fee.sql
+--   psql -h localhost -p 5432 -U postgres -d ecom_dev -f 012_schema-packaging-boxes.sql
+
+-- OR use the PowerShell helper script:
+--   .\setup-db.ps1

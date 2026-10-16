@@ -1,0 +1,350 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Six Yards Love Design System
+   =====================
+   A saree brand.
+   "Six Yards. Endless Love."
+
+   Color Palette (drawn from the logo):
+   - Gold:   #C6A061  logo gold — fills, ornaments, accents on dark
+   - Gold deep: #80622D  gold for text on light surfaces (AA contrast)
+   - Wine:   #5C1A35  primary actions, links
+   - Ink:    #23131B  aubergine-black — text, dark surfaces
+   - Cream:  #FBF7F1  page background
+
+   Typography:
+   - Headings: Cormorant Garamond (echoes the logo's high-contrast serif)
+   - Body: Jost (clean, modern geometric sans)
+*/
+
+@layer base {
+  :root {
+    --background: 36 56% 96%;
+    --foreground: 330 30% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 330 30% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 330 30% 11%;
+
+    /* Primary: Wine */
+    --primary: 335 56% 23%;
+    --primary-foreground: 36 56% 96%;
+
+    /* Secondary: Logo Gold */
+    --secondary: 37 47% 58%;
+    --secondary-foreground: 330 30% 11%;
+    --secondary-text: 38 48% 34%;
+
+    --muted: 37 49% 91%;
+    --muted-foreground: 335 8% 40%;
+
+    --accent: 37 49% 91%;
+    --accent-foreground: 330 30% 11%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 35 39% 85%;
+    --input: 35 39% 85%;
+    --ring: 37 47% 58%;
+
+    --radius: 0.875rem;
+
+    --sidebar-background: 330 30% 11%;
+    --sidebar-foreground: 36 56% 96%;
+    --sidebar-primary: 37 47% 58%;
+    --sidebar-primary-foreground: 330 30% 11%;
+    --sidebar-accent: 325 26% 18%;
+    --sidebar-accent-foreground: 36 56% 96%;
+    --sidebar-border: 325 26% 18%;
+    --sidebar-ring: 37 47% 58%;
+
+    /* Brand tokens (legacy names kept so existing classes map to the new palette) */
+    --forest: 330 30% 11%; /* Ink */
+    --forest-light: 325 26% 18%;
+    --ochre: 37 47% 58%; /* Gold */
+    --ochre-light: 40 51% 83%;
+    --ochre-dark: 38 48% 34%;
+    --ochre-text: 38 48% 34%;
+    --ivory: 36 56% 96%; /* Cream */
+    --parchment: 36 53% 93%;
+    --charcoal: 330 30% 11%;
+    --wine: 335 56% 23%;
+    --wine-light: 336 49% 32%;
+  }
+
+  .dark {
+    --background: 330 30% 8%;
+    --foreground: 36 56% 96%;
+    --card: 330 30% 11%;
+    --card-foreground: 36 56% 96%;
+    --popover: 330 30% 11%;
+    --popover-foreground: 36 56% 96%;
+    --primary: 37 47% 58%;
+    --primary-foreground: 330 30% 11%;
+    --secondary: 325 26% 18%;
+    --secondary-foreground: 36 56% 96%;
+    --secondary-text: 37 47% 58%;
+    --muted: 325 26% 18%;
+    --muted-foreground: 35 20% 70%;
+    --accent: 325 26% 18%;
+    --accent-foreground: 36 56% 96%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 325 26% 22%;
+    --input: 325 26% 22%;
+    --ring: 37 47% 58%;
+    --ochre-text: 37 47% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ivory text-foreground font-sans antialiased relative min-h-screen overflow-x-hidden;
+    font-feature-settings: "kern", "liga";
+  }
+
+  ::selection {
+    background: hsl(var(--secondary) / 0.35);
+    color: hsl(var(--forest));
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .bg-white,
+  .bg-card {
+    background-color: white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-semibold;
+    letter-spacing: -0.01em;
+  }
+
+  h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl leading-[1.05];
+  }
+
+  h2 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-[1.1];
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  .container-institutional {
+    @apply max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-28;
+  }
+
+  .prose-institutional {
+    @apply text-lg leading-relaxed text-muted-foreground;
+  }
+
+  /* Small uppercase eyebrow above headings */
+  .section-label {
+    @apply inline-flex items-center gap-3 text-ochre text-xs font-medium tracking-[0.3em] uppercase;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    content: "";
+    @apply h-px w-8 bg-secondary/60;
+  }
+
+  .tagline {
+    @apply font-display font-semibold text-forest leading-tight;
+  }
+
+  .sector-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary/15 text-secondary;
+  }
+
+  .category-disclaimer {
+    @apply rounded-2xl p-6 md:p-8 border-l-4 border-secondary bg-card border border-border;
+  }
+
+  .category-disclaimer p {
+    @apply text-muted-foreground leading-relaxed;
+  }
+
+  .metric-card {
+    @apply p-6 md:p-8 bg-card rounded-2xl border border-border;
+  }
+
+  /* Gold foil text */
+  .text-gold-foil {
+    background: linear-gradient(
+      100deg,
+      #a8823f 0%,
+      #e6cf9d 35%,
+      #c6a061 55%,
+      #8f6e35 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Gold hairline with a center diamond — section divider */
+  .ornament-divider {
+    @apply flex items-center justify-center gap-3 text-secondary;
+  }
+
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: "";
+    @apply h-px w-16 md:w-24;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--secondary)),
+      transparent
+    );
+  }
+
+  .hero-pattern {
+    background-image:
+      radial-gradient(
+        circle at 15% 85%,
+        hsl(var(--secondary) / 0.14) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 85% 15%,
+        hsl(var(--wine) / 0.08) 0%,
+        transparent 45%
+      );
+  }
+
+  .category-card {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -18px hsl(var(--wine) / 0.35);
+  }
+
+  .metric-number {
+    @apply text-gold-foil;
+  }
+
+  .hover-ochre:hover {
+    background-color: hsl(var(--ochre-dark));
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Scrolling ticker */
+  .ticker-container {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+
+  .ticker-content {
+    animation: ticker 60s linear infinite;
+  }
+
+  .ticker-container:hover .ticker-content {
+    animation-play-state: paused;
+  }
+
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer utilities {
+  /* Rangoli rotation */
+  @keyframes rangoli-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-rangoli {
+    animation: rangoli-spin var(--rangoli-duration, 90s) linear infinite;
+    animation-direction: var(--rangoli-direction, normal);
+    transform-origin: 50% 50%;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-rangoli,
+    .animate-float,
+    .ticker-content {
+      animation: none;
+    }
+  }
+}

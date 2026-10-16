@@ -1,0 +1,41 @@
+app:
+  jwt:
+    secret: dGVzdC1zZWNyZXQta2V5LWZvci11bml0LXRlc3Rpbmctb25seQ==
+    expiration-ms: 3600000
+    refresh-expiration-ms: 604800000
+  email:
+    api-key: test-resend-key
+    from: test@sixyardslove.com
+    frontend-base-url: http://localhost:3000
+  shiprocket:
+    email: test@sixyardslove.com
+    password: testpassword
+    base-url: http://localhost:9999
+    channel-id: ""
+    webhook-secret: ""
+    pickup-location: Home
+    pickup-postcode: "400001"
+    default-length: 10
+    default-breadth: 10
+    default-height: 10
+    default-weight: 0.5
+  razorpay:
+    key-id: rzp_test_testkey
+    key-secret: testkeysecret
+    webhook-secret: ""
+  aws:
+    region: ap-south-1
+    access-key-id: test
+    secret-access-key: test
+    s3:
+      media-bucket: test-bucket
+      presign-expiry-minutes: 10
+  geo:
+    db-path: classpath:GeoLite2-Country.mmdb
+    default-country: IN
+    seller-state: MH
+  cors:
+    allowed-origins: http://localhost:3000
+    allowed-methods: GET,POST,PUT,PATCH,DELETE,OPTIONS
+    allowed-headers: "*"
+    allow-credentials: true

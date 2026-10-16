@@ -1,0 +1,36 @@
+[Unit]
+Description=Six Yards Love E-com Spring Boot Backend
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+
+WorkingDirectory=/opt/ecom-backend
+
+# ── Env vars ────────────────────────────────────────────────────────────────
+# All secrets come from /etc/ecom-backend/env — a file NOT in version control.
+# See infra/systemd/env.example for required keys.
+EnvironmentFile=/etc/ecom-backend/env
+
+ExecStart=/usr/bin/java \
+  -Xms256m -Xmx512m \
+  -Dspring.profiles.active=prod \
+  -jar /opt/ecom-backend/ecom-backend.jar
+
+# ── Graceful shutdown ────────────────────────────────────────────────────────
+ExecStop=/bin/kill -SIGTERM $MAINPID
+TimeoutStopSec=30
+
+# ── Restart policy ───────────────────────────────────────────────────────────
+Restart=on-failure
+RestartSec=10
+
+# ── Logging (view with: journalctl -u ecom-backend -f) ──────────────────────
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ecom-backend
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,40 @@
+---
+description: TypeScript and React best practices for .ts and .tsx files
+globs: ["**/*.ts", "**/*.tsx"]
+alwaysApply: false
+---
+
+# TypeScript & React Practices
+
+Apply when editing `**/*.ts` or `**/*.tsx`.
+
+## TypeScript
+
+- Prefer **explicit types** for component props, hook returns, and public function signatures. Avoid `any` unless required by a third-party.
+- **Error handling:** Do not use empty `catch`. Log and/or rethrow, or handle meaningfully.
+- Use `const` by default; `let` only when reassignment is needed.
+
+```ts
+// ✅ GOOD — typed props
+interface CardProps { title: string; children?: React.ReactNode; }
+export function Card({ title, children }: CardProps) { ... }
+
+// ❌ BAD — empty catch
+try { await fetch(); } catch (e) {}
+```
+
+## React
+
+- **Functional components** only. Use hooks for state and side effects.
+- **Exports:** Default for pages (`src/pages/*.tsx`); named for components, hooks, and utilities.
+- Extract **custom hooks** for reusable stateful logic (e.g. `useToast`, `useIsMobile`). Keep components focused on rendering.
+- Prefer `React.ReactNode` or explicit union types for `children` over untyped props.
+
+## Files & organization
+
+- One main component or hook per file. Colocate small helpers in the same file only if used solely there.
+- For `index.ts` barrels: re-export only; no new logic. Keep `src/pages/index.ts` exports in sync with new pages.
+
+## Async & data
+
+- Handle loading and error states when fetching. Avoid leaving `undefined` or unhandled rejections in user-facing flows.

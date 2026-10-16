@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: ecom-backend
+  profiles:
+    active: dev
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+server:
+  port: 8081
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-ms: 3600000        # 1 hour
+    refresh-expiration-ms: 604800000  # 7 days
+  geo:
+    db-path: ${GEOIP_DB_PATH:classpath:GeoLite2-Country.mmdb}
+    default-country: IN
+    seller-state: RJ # TODO: set SYL seller state
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:3001,http://localhost:4200}
+    allowed-methods: GET,POST,PUT,PATCH,DELETE,OPTIONS
+    allowed-headers: "*"
+    allow-credentials: true
+  email:
+    api-key: ${RESEND_API_KEY}
+    from: ${EMAIL_FROM:noreply@sixyardslove.com}
+    frontend-base-url: ${FRONTEND_BASE_URL:https://www.sixyardslove.com}
+  shiprocket:
+    email: ${SHIPROCKET_EMAIL:shipping@sixyardslove.com}
+    password: ${SHIPROCKET_PASSWORD}
+    base-url: https://apiv2.shiprocket.in/v1/external
+    channel-id: ${SHIPROCKET_CHANNEL_ID:}
+    webhook-secret: ${SHIPROCKET_WEBHOOK_SECRET:}
+    pickup-location: ${SHIPROCKET_PICKUP_LOCATION:Home}
+    pickup-postcode: ${SHIPROCKET_PICKUP_POSTCODE:400001}
+    # token TTL: 9 days (Shiprocket tokens expire after 10)
+    default-length: 10
+    default-breadth: 10
+    default-height: 10
+    default-weight: 0.5
+    scheduler:
+      interval: ${SHIPROCKET_SCHEDULER_INTERVAL:3600000}
+  razorpay:
+    key-id: ${RZP_KEY_ID}
+    key-secret: ${RZP_KEY_SECRET}
+    webhook-secret: ${RZP_WEBHOOK_SECRET:}
+    test-mode: ${RZP_TEST_MODE:false}
+    test-key-id: ${RZP_TEST_KEY_ID:}
+    test-key-secret: ${RZP_TEST_KEY_SECRET:}
+  aws:
+    region: ${AWS_REGION:ap-south-1}
+    access-key-id: ${AWS_ACCESS_KEY_ID}
+    secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+    s3:
+      media-bucket: ${AWS_S3_MEDIA_BUCKET:syl-media}
+      presign-expiry-minutes: 10

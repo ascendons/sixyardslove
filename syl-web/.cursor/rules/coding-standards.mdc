@@ -1,0 +1,42 @@
+---
+description: Core coding standards, project layout, and doc-first workflow. Uphold in every change.
+alwaysApply: true
+---
+
+# Six Yards Love Nexus — Coding Standards
+
+Uphold these in **every** code change.
+
+## Doc-first & structure
+
+- **Directives:** When asked to "implement directives" or "apply DIRECTIVES", read `docs/DIRECTIVES.md` (To implement) and implement those items. Follow `docs/STRUCTURE.md` for where to put code.
+- **Layout:** New components → `src/components/{common|layout|home|ui}/` and their `index.ts`; pages → `src/pages/` + `src/pages/index.ts`; routes → `src/routes.tsx` only. New hooks → `src/hooks/`, content/copy → `src/content/`, helpers → `src/lib/`.
+
+## Reuse, no breakage
+
+- Prefer **existing** styles (`src/index.css`, `tailwind.config.ts`), components (`@/components`, `@/components/ui/*`), content (`@/content`), and utilities (`@/lib`). Do not duplicate; extend when needed.
+- **Do not break** existing behavior. When modifying code, ensure current features and imports still work. Run `npm run build`, `npm run test`, and `npm run lint` (if available) after nontrivial edits.
+
+## Changing existing components
+
+**Whenever you change an existing component, scan the tree for breakage before and after:**
+
+1. **Find all usages:** Search the codebase for imports and references to that component (by name and via barrels, e.g. `@/components/layout`, `@/components/home`, `@/components/ui/...`). Check `src/pages`, `src/components`, `src/App.tsx`, `src/routes.tsx`, and any `index.ts` that re-exports it.
+2. **Assess impact:** If you change props, remove or rename exports, or change the component's file path, update every call site and every barrel that re-exports it. Same for hooks, `content/`, or `lib/` utilities: find all consumers before changing signatures or exports.
+3. **Verify after edits:** Run `npm run build`, `npm run test`, and `npm run lint` (if available). Fix any new errors. Prefer a quick grep/search for the component or symbol name to confirm no stale imports or missing updates.
+
+## Imports
+
+- Use the `@/` alias for `src/`. Barrel imports: `@/components`, `@/hooks`, `@/lib`, `@/content`, `@/pages`. UI primitives: `@/components/ui/button`, `@/components/ui/input`, etc. (direct, not via barrel).
+
+## Styling
+
+- Tailwind + `cn()` from `@/lib` for `className`. Use design tokens and component classes from `src/index.css` (e.g. `container-institutional`, `section-padding`, `badge-producer`, `--primary`, `--secondary`).
+
+## Routes & pages
+
+- Add routes only in `src/routes.tsx`; keep the `path="*"` (NotFound) route last. New pages: create `src/pages/PageName.tsx` (default export), add to `src/pages/index.ts`, then add `<Route path="..." element={<PageName />} />`.
+
+## Summary
+
+Follow DIRECTIVES and STRUCTURE; reuse existing code and styles; avoid breaking changes; use `@/` and the correct barrels; style with Tailwind and `cn()`; add routes only in `routes.tsx`. **When changing an existing component:** scan the tree for all usages and barrels, update call sites if props/exports/paths change, then run build, test, and lint.

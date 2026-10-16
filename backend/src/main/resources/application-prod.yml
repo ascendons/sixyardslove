@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+  jpa:
+    show-sql: false
+
+app:
+  email:
+    frontend-base-url: ${FRONTEND_BASE_URL:https://sixyardslove.com}
+  aws:
+    access-key-id: ${AWS_ACCESS_KEY_ID}
+    secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+
+logging:
+  level:
+    com.ascendons: INFO
+    org.springframework.security: WARN

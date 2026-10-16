@@ -1,0 +1,62 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/syl_dev}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8081
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:dG9tb3NvbWUta2V5LWZvci1sb2NhbC1kZXYtMjAyNFBBU0M=}
+    expiration-ms: 3600000
+    refresh-expiration-ms: 604800000
+  email:
+    api-key: ${RESEND_API_KEY:dummy-key-for-local-dev}
+    from: ${EMAIL_FROM:noreply@sixyardslove.com}
+    frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:3000}
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:3001}
+  aws:
+    region: ${AWS_REGION:ap-south-1}
+    access-key-id: ${AWS_ACCESS_KEY_ID:AKIA_LOCAL_DEV_PLACEHOLDER}
+    secret-access-key: ${AWS_SECRET_ACCESS_KEY:local-dev-secret-key-placeholder}
+    s3:
+      media-bucket: ${AWS_S3_MEDIA_BUCKET:syl-media}
+      presign-expiry-minutes: 10
+  razorpay:
+    key-id: ${RZP_KEY_ID:rzp_test_local}
+    key-secret: ${RZP_KEY_SECRET:local-secret}
+    webhook-secret: ${RZP_WEBHOOK_SECRET:}
+    test-mode: false
+  shiprocket:
+    email: ${SHIPROCKET_EMAIL:ship@sixyardslove.com}
+    password: ${SHIPROCKET_PASSWORD:}
+    base-url: https://apiv2.shiprocket.in/v1/external
+    channel-id: ${SHIPROCKET_CHANNEL_ID:}
+    webhook-secret: ${SHIPROCKET_WEBHOOK_SECRET:}
+    pickup-location: ${SHIPROCKET_PICKUP_LOCATION:warehouse}
+    pickup-postcode: ${SHIPROCKET_PICKUP_POSTCODE:400001}
+    default-length: 10
+    default-breadth: 10
+    default-height: 10
+    default-weight: 0.5
+  geo:
+    db-path: ${GEOIP_DB_PATH:classpath:GeoLite2-Country.mmdb}
+    default-country: IN
+    seller-state: RJ
+
+logging:
+  level:
+    com.ascendons: DEBUG
+    org.springframework.security: DEBUG
