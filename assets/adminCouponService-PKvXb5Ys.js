@@ -1,0 +1,1 @@
+import{a}from"./index-B1zQZ9o4.js";const s={getAllCoupons:async()=>(await a.get("/admin/coupons/all")).data||[],createCoupon:async e=>(await a.post("/admin/coupons/create",e)).data,updateCoupon:async(e,n)=>(await a.put(`/admin/coupons/update/${e}`,n)).data,deleteCoupon:async e=>{await a.delete(`/admin/coupons/delete/${e}`)}};export{s as default};
